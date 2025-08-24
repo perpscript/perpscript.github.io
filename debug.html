@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 10px; border: 1px solid #ccc; }
+        img { max-width: 200px; max-height: 200px; border: 1px solid #ddd; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Debug Test</h1>
+    
+    <div class="test">
+        <h3>Test 1: Relative path (pfp.jpg)</h3>
+        <img src="pfp.jpg" alt="Test 1" onerror="this.nextElementSibling.textContent='❌ Failed to load: ' + this.src" onload="this.nextElementSibling.textContent='✅ Loaded successfully'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="test">
+        <h3>Test 2: Current directory (./pfp.jpg)</h3>
+        <img src="./pfp.jpg" alt="Test 2" onerror="this.nextElementSibling.textContent='❌ Failed to load: ' + this.src" onload="this.nextElementSibling.textContent='✅ Loaded successfully'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="test">
+        <h3>Test 3: PNG version (pfp.png)</h3>
+        <img src="pfp.png" alt="Test 3" onerror="this.nextElementSibling.textContent='❌ Failed to load: ' + this.src" onload="this.nextElementSibling.textContent='✅ Loaded successfully'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="test">
+        <h3>Test 4: Profile copy (profile.jpg)</h3>
+        <img src="profile.jpg" alt="Test 4" onerror="this.nextElementSibling.textContent='❌ Failed to load: ' + this.src" onload="this.nextElementSibling.textContent='✅ Loaded successfully'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="test">
+        <h3>Test 5: Absolute file path</h3>
+        <img src="file:///home/perps/Documents/perpsdev.github.io/pfp.jpg" alt="Test 5" onerror="this.nextElementSibling.textContent='❌ Failed to load: ' + this.src" onload="this.nextElementSibling.textContent='✅ Loaded successfully'">
+        <div class="status"></div>
+    </div>
+    
+    <div class="test">
+        <h3>Test 6: HTTP server (should work)</h3>
+        <img src="http://localhost:8000/pfp.jpg" alt="Test 6" onerror="this.nextElementSibling.textContent='❌ Failed to load: ' + this.src" onload="this.nextElementSibling.textContent='✅ Loaded successfully'">
+        <div class="status"></div>
+    </div>
+    
+    <script>
+        console.log('Page loaded');
+        console.log('Current location:', window.location.href);
+        console.log('Protocol:', window.location.protocol);
+        
+        // Test if we can access local files
+        fetch('pfp.jpg')
+            .then(response => {
+                console.log('Fetch test successful:', response.status);
+            })
+            .catch(error => {
+                console.error('Fetch test failed:', error);
+            });
+    </script>
+</body>
+</html>

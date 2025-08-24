@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+</head>
+<body>
+    <h1>Image Test</h1>
+    
+    <h2>Test 1: Relative path</h2>
+    <img src="pfp.jpg" alt="Test 1" width="200" height="200" onerror="console.error('Test 1 failed')" onload="console.log('Test 1 loaded')">
+    
+    <h2>Test 2: Current directory path</h2>
+    <img src="./pfp.jpg" alt="Test 2" width="200" height="200" onerror="console.error('Test 2 failed')" onload="console.log('Test 2 loaded')">
+    
+    <h2>Test 3: Absolute file path</h2>
+    <img src="file:///home/perps/Documents/perpsdev.github.io/pfp.jpg" alt="Test 3" width="200" height="200" onerror="console.error('Test 3 failed')" onload="console.log('Test 3 loaded')">
+    
+    <script>
+        console.log('Page loaded');
+        console.log('Current directory:', window.location.href);
+    </script>
+</body>
+</html>

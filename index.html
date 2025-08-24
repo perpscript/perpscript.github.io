@@ -1,1 +1,238 @@
 <!DOCTYPE HTML>
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>// perplexing embeds //</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1220; --panel: #151932; --accent: #7c5cff; --accent2:#21d4fd; --text:#e9edff; --muted:#9aa3c7;
+    }
+    * { box-sizing: border-box; }
+    body { 
+      margin: 0; 
+      font-family: 'Ubuntu', system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; 
+      background: var(--bg);
+      color: var(--text);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Background Image with Blur */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #0a0a0a, #1a1a1a, #0a0a0a);
+      background-image: url('https://static.wikia.nocookie.net/flood-escape-2/images/5/55/DARK.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(8px) brightness(0.7) contrast(1.2);
+      z-index: -2;
+    }
+    
+    /* Dark overlay for better text readability */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(26, 31, 60, 0.4) 0%, rgba(15, 18, 32, 0.5) 60%);
+      z-index: -1;
+    }
+    header { padding: 28px 20px 10px; text-align: center; }
+    h1 { 
+        margin: 0; 
+        font-size: 2.1rem; 
+        letter-spacing: .5px; 
+        background: linear-gradient(90deg,var(--accent2),var(--accent),var(--accent2)); 
+        background-size: 200% 100%;
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+        background-clip: text;
+        animation: gradient-wave 3s ease-in-out infinite;
+    }
+    
+    @keyframes gradient-wave {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    p.sub { margin:.5rem 0 0; color: var(--muted); }
+    .shell { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .section { margin-bottom: 48px; }
+    .section-header { text-align: center; margin-bottom: 32px; }
+    .section-title { font-size: 1.8rem; margin: 0 0 8px; background: linear-gradient(90deg,var(--accent2),var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-subtitle { color: var(--muted); font-size: 1rem; margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 18px;
+        align-items: start;
+    }
+    
+    .card-container .card:nth-child(1) {
+        grid-row: span 2 / span 2;
+    }
+    
+    .card-container .card:nth-child(2) {
+        grid-row: span 3 / span 3;
+    }
+    
+    .card-container .card:nth-child(3) {
+        grid-row: span 3 / span 3;
+        grid-row-start: 3;
+    }
+    .card { background: linear-gradient(180deg, rgba(124,92,255,.12), rgba(124,92,255,.06) 30%, rgba(255,255,255,.02)); border: 1px solid rgba(124,92,255,.25); border-radius: 18px; padding: 16px; display:flex; flex-direction:column; gap:10px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .card h3 { margin: 2px 0 0; font-size: 1.1rem; }
+    .tag { display:inline-block; padding:4px 10px; border-radius:999px; font-size:.75rem; letter-spacing:.2px; background:linear-gradient(90deg,var(--accent2),var(--accent)); color:#0a0f1a; font-weight:700; }
+    .btn { cursor:pointer; background: linear-gradient(90deg, var(--accent), var(--accent2)); border: none; color: #0a0f1a; font-weight: 800; padding: 10px 14px; border-radius: 12px; transition: transform .08s ease; }
+    .btn:active { transform: translateY(1px) scale(.99); }
+
+    .profile-layout {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .profile-layout img {
+        border-radius: 12px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    
+    .profile-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .modal { position: fixed; inset: 0; display: none; place-items: center; padding: 16px; background: rgba(5, 7, 12, .6); backdrop-filter: blur(6px); }
+    .modal.open { display: grid; }
+    .panel { width: min(1400px, 98vw); max-height: 95vh; background: var(--panel); border:1px solid rgba(255,255,255,.08); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.45); }
+    
+    /* Responsive modal adjustments */
+    @media (max-width: 768px) {
+      .panel { width: 98vw; max-height: 98vh; }
+      .panel main iframe { height: 60vh; min-height: 400px; }
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>// perplexing //</h1>
+    <p class="sub">one idiot codes pretty mid things</p>
+</header>
+<div class="shell">
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">about me</h2>
+            <p class="section-subtitle">everything u should know abt me, perps</p>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <div class="profile-layout">
+                    <img src="./pfp.jpg" alt="my pfp" width="150" height="180">
+                    <div class="profile-info">
+                        <span class="tag">basic stuffs</span>
+                        <h3 class="section-title">name: perps</h3>
+                        <p class="section-subtitle">pronouns: he/they (im xeno aha)</p>
+                        <p class="section-subtitle">sexuality: omnisexual</p>
+                        <p class="section-subtitle">all my personal details (like irl name, age etc) wont be revealed cuz im insecure as hell</p>
+                        <p class="section-subtitle">i commissioned <a href="x.com/Carol92">Carol92</a> for this pfp</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <span class="tag">interest/dni</span>
+                <h3 class="section-title">interests</h3>
+                <p class="section-subtitle">- programming (albeit badly)</p>
+                <p class="section-subtitle">- occasional composing</p>
+                <p class="section-subtitle">- music: glass beach, tiny emperor</p>
+                <p class="section-subtitle">- games: ULTRAKILL, Flood Escape 2, Liquid Breakout</p>
+                <h3 class="section-title">do not interact</h3>
+                <p class="section-subtitle">- discriminatory people (racism, homophobia, the whole umbrella)</p>
+                <p class="section-subtitle">- weird fetish people</p>
+                <p class="section-subtitle">- mood killers/people that are just rude for no reason</p>
+            </div>
+            <div class="card">
+                <span class="tag">my works</span>
+                <h3 class="section-title">projects released</h3>
+                <p class="section-subtitle">- this website lol</p>
+                <p class="section-subtitle">basically nothing else</p>
+                <h3 class="section-title">projects in progress</h3>
+                <p class="small">EXSANGUINE [roblox game]</p>
+                <p class="section-subtitle">a fast-paced, platforming game with combat mechanics</p>
+                <p class="section-subtitle">inspired by ULTRAKILL, if it was mixed with Liquid Breakout</p>
+                <p class="section-subtitle">game is in heavy development rn!</p>
+            </div>
+            <div class="card">
+                <span class="tag">socials</span>
+                <h3 class="section-title">will put these in some other time</h3>
+            </div>
+        </div>
+        
+    </section>
+</div>
+
+</body>
+</html>
+
+<!--
+HTML:
+
+<div class="parent">
+    <div class="div1">1</div>
+    <div class="div2">2</div>
+    <div class="div3">3</div>
+    <div class="div4">4</div>
+</div>
+
+-->
+
+<!--
+CSS:
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+    
+.div1 {
+    grid-row: span 2 / span 2;
+}
+
+.div2 {
+    grid-row: span 3 / span 3;
+}
+
+.div3 {
+    grid-row: span 3 / span 3;
+    grid-row-start: 3;
+}
+
+.div4 {
+    grid-row: span 2 / span 2;
+    grid-column-start: 2;
+    grid-row-start: 4;
+}
+        
+-->
